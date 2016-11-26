@@ -1,5 +1,5 @@
-/*.obj
-/*.o
-/pnm2ppa_private.*
-/pnm2ppa.layout
+*.obj
+*.o
+pnm2ppa_private.*
+*.layout
 
