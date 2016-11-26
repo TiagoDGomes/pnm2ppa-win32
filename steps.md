@@ -1,8 +1,8 @@
 Original message: https://sourceforge.net/p/pnm2ppa/mailman/message/268980/
 
 RE: [Pnm2ppa-users] windows solution
-From: Andrew van der Stock <ajv@gr...> - 2003-06-07 14:16:45
 
+From: Andrew van der Stock \<ajv@gr...\> - 2003-06-07 14:16:45
 
 Actually, a long, long time ago, I did a lot of the initial clean up and optimization of the old pbm2ppa code in Visual Studio 6.0 using the C++ compiler. This was before Klamer's excellent ink lookup code was added. The code generally assumes POSIX behavior for the most part. Luckily, this means that even after two and a bit years of major changes, it still builds and works under win32 with a few minor changes. I don't know why you'd want to do so, which is why I never officially added win32 as a target. If you have a lazy Saturday to burn, here's how to build under win32:
 
@@ -38,13 +38,17 @@ In global.h, add
 just under the #define for VERSION. This is a furphy - NT supports very very long path lengths, but 1024 is plenty for most users, and realistically Visual Studio's std C library is a bit sucky through extreme neglect, so it's safer to put a short limit on it.
 
 Remove the include for `<sys/param.h\>` in pnm2ppa.c
+
 Remove the include for `<unistd.h\>` in pnm2ppa.c
 
 Press control-h to bring up find and replace in all C files...
 
 Replace all 72 instances of `snprintf` with `_snprintf`
+
 Replace all 6 instances of `strcasecmp` with `_stricmp`
+
 Replace all instances of `<getopt.h>` with `"gnugetopt.h"`
+
 Replace all "inline" key words with `"/*` in-line doesn't work `*/"`
 
 The compiler barfs on these as the way pnm2ppa uses inline is a gcc-ism. Visual Studio's compiler is *way* smarter at picking these routines than we are anyway, particularly if you optimize for speed.
