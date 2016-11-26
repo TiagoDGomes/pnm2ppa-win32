@@ -25,9 +25,9 @@
 /*
  * Global types
  */
-
+#ifndef MAXPATHLEN
 #define MAXPATHLEN  1024
-
+#endif
 typedef enum
 { false = 0, true = 1 }
 BOOLEAN;
