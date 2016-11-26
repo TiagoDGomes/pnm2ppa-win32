@@ -8,7 +8,7 @@ Actually, a long, long time ago, I did a lot of the initial clean up and optimiz
 
 Grab a copy of the sources, and have a Visual Studio C++ compiler lying around. Cygwin may just "work", but I haven't tried. I am using Visual Studio.NET 2002 Standard Edition. Untar the sources using WinZip.
 
-Remove the one "inline" in `make_hash_ink.c`. Just use cl.exe directly on make_hash_ink.c - it's a necessary precursor for building pnm2ppa.
+Remove the one "inline" in *make_hash_ink.c*. Just use *cl.exe* directly on *make_hash_ink.c* - it's a necessary precursor for building pnm2ppa.
 
     C:\home\ajv\Visual Studio Projects\pnm2ppa>cl make_hash_ink.c
     Microsoft (R) 32-bit C/C++ Standard Compiler Version 13.00.9466 for 80x86
@@ -27,11 +27,11 @@ Remove the one "inline" in `make_hash_ink.c`. Just use cl.exe directly on make_h
     [ ... ]
     07/06/2003  10:46 PM         1,190,590 hash_ink.c
 
-Start a new visual studio project for pnm2ppa, make it an empty Win32 console application. Add all the C files to the project, including the new hash_ink.c.
+Start a new visual studio project for pnm2ppa, make it an empty Win32 console application. Add all the C files to the project, including the new *hash_ink.c*.
 
-Download a copy of GNU's gengetopt. Untar and grab a copy of getopt.c, getopt1.c and gnugetopt.h. Add all three files to the Visual Studio project.
+Download a copy of GNU's gengetopt. Untar and grab a copy of *getopt.c*, *getopt1.c* and *gnugetopt.h*. Add all three files to the Visual Studio project.
 
-In global.h, add
+In *global.h*, add
 
     #define MAXPATHLEN	1024
 
