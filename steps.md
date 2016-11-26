@@ -12,20 +12,20 @@ Remove the one "inline" in make_hash_ink.c. Just use cl.exe directly on make_has
 
 `C:\home\ajv\Visual Studio Projects\pnm2ppa>cl make_hash_ink.c
 Microsoft (R) 32-bit C/C++ Standard Compiler Version 13.00.9466 for 80x86
-Copyright (C) Microsoft Corporation 1984-2001. All rights reserved.
+Copyright (C) Microsoft Corporation 1984-2001. All rights reserved.`
 
-make_hash_ink.c
+`make_hash_ink.c
 Microsoft (R) Incremental Linker Version 7.00.9466
-Copyright (C) Microsoft Corporation.  All rights reserved.
+Copyright (C) Microsoft Corporation.  All rights reserved.`
 
-/out:make_hash_ink.exe
-make_hash_ink.obj
+`/out:make_hash_ink.exe
+make_hash_ink.obj`
 
-C:\home\ajv\Visual Studio Projects\pnm2ppa>make_hash_ink.exe 4 3 > hash_ink.c
+`C:\home\ajv\Visual Studio Projects\pnm2ppa>make_hash_ink.exe 4 3 > hash_ink.c
 C:\home\ajv\Visual Studio Projects\pnm2ppa>make_hash_ink.exe 1 5 >> hash_ink.c
-C:\home\ajv\Visual Studio Projects\pnm2ppa>dir
-[ ... ]
-07/06/2003  10:46 PM         1,190,590 hash_ink.c`
+C:\home\ajv\Visual Studio Projects\pnm2ppa>dir`
+`[ ... ]`
+`07/06/2003  10:46 PM         1,190,590 hash_ink.c`
 
 Start a new visual studio project for pnm2ppa, make it an empty Win32
 console application. Add all the C files to the project, including the new hash_ink.c.
@@ -61,18 +61,18 @@ Click "Rebuild". About 2-3 seconds later, you have a working pnm2ppa for win32 i
 
 `C:\home\ajv\Visual Studio Projects\pnm2ppa\Release>dir *.exe
 [ ...]
-07/06/2003  11:45 PM           540,672 pnm2ppa.exe
+07/06/2003  11:45 PM           540,672 pnm2ppa.exe`
 
-C:\home\ajv\Visual Studio Projects\pnm2ppa>pnm2ppa.exe --verbose -i test.pnm -o test.ppa
+`C:\home\ajv\Visual Studio Projects\pnm2ppa>pnm2ppa.exe --verbose -i test.pnm -o test.ppa
 pnm2ppa: Starting print job
 pnm2ppa: Printing  page  1 (PixMap)
 pnm2ppa: Finished rendering page  1
-pnm2ppa: Print job completed successfully.
+pnm2ppa: Print job completed successfully.`
 
-C:\home\ajv\Visual Studio Projects\pnm2ppa>dir test.ppa
-[ ... ]
+`C:\home\ajv\Visual Studio Projects\pnm2ppa>dir test.ppa
+[ ... ]`
 
-07/06/2003  11:50 PM            62,647 test.ppa`
+`07/06/2003  11:50 PM            62,647 test.ppa`
 
 But the reality is that the HP driver + Ghostscript using GDI or use Ghostscript to make PDF's, and then printing via Acrobat is the best choice.
 
