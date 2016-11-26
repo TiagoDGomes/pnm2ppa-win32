@@ -15,13 +15,14 @@
  *                                                                         *
  ***************************************************************************/
 
+
 #ifndef _PNM2PPA_H_
 #define _PNM2PPA_H_
 
 #ifdef __PNM2PPA_C__
 
-static char *defaultcfgfile = SYSCONFDIR "/pnm2ppa.conf";
-static char *defaultgammafile = SYSCONFDIR "/pnm2ppa.gamma";
+static char *defaultcfgfile = "pnm2ppa.conf";
+static char *defaultgammafile = "pnm2ppa.gamma";
 
 static ppaPrinter_t printer;
 

@@ -23,10 +23,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include <unistd.h>
+/*#include <unistd.h>*/
 
-#include <getopt.h>
-#include <sys/param.h>
+#include "getopt.h"
+/*#include <sys/param.h>*/
 
 #define __PNM2PPA_C__
 
@@ -41,6 +41,8 @@
 #include "lang.h"
 
 
+#include "pnm2ppa.h"
+
 double  Gamma_R, Gamma_G, Gamma_B;
 int adjust_coloffsx, adjust_coloffsy;
 
@@ -53,7 +55,7 @@ print_pnm (FILE * fptr)
     int res;
     int image_width;
 
-    snprintf(syslog_message,message_size,"%s", 
+    _snprintf(syslog_message,message_size,"%s", 
 	     gMessages[LOG_START]);
     wrap_syslog (LOG_INFO,"%s",syslog_message); 
 
@@ -76,7 +78,7 @@ print_pnm (FILE * fptr)
 
 	if (!gErrVec)
 	  {
-	    snprintf(syslog_message,message_size,"print_pnm(): %s",
+	    _snprintf(syslog_message,message_size,"print_pnm(): %s",
 		     gMessages[E_BADMALLOC]);
 	    wrap_syslog (LOG_CRIT, "%s",syslog_message); 
 	    exit (1);
@@ -87,14 +89,14 @@ print_pnm (FILE * fptr)
 
 	if (!gErrVec_bw)
 	{
-	    snprintf(syslog_message,message_size, "print_pnm(): %s", 
+	    _snprintf(syslog_message,message_size, "print_pnm(): %s", 
 		     gMessages[E_BADMALLOC]);
 	    wrap_syslog (LOG_CRIT, "%s",syslog_message); 
 	    exit (1);
 	}
 	memset (gErrVec_bw, 0x00, image_width );
 
-	snprintf(syslog_message,message_size, "%s %d (%s)\n", 
+	_snprintf(syslog_message,message_size, "%s %d (%s)\n", 
 		 gMessages[LOG_PAGE], pagenum, gFormat);
 	wrap_syslog (LOG_INFO,  "%s",syslog_message); 
 
@@ -107,7 +109,7 @@ print_pnm (FILE * fptr)
 	}
 	free (gErrVec);
 	free (gErrVec_bw);
-	snprintf(syslog_message,message_size, "%s %d\n", 
+	_snprintf(syslog_message,message_size, "%s %d\n", 
 		 gMessages[LOG_FINISH], pagenum );
 	wrap_syslog (LOG_INFO,  "%s",syslog_message); 
 
@@ -126,7 +128,7 @@ print_pnm (FILE * fptr)
 
     if (numpages == 0)
     {
-      snprintf(syslog_message,message_size,"%s" , 
+      _snprintf(syslog_message,message_size,"%s" , 
 	       gMessages[LOG_NOPAGES]);
       wrap_syslog (LOG_INFO,  "%s",syslog_message); 
       return 1;
@@ -134,7 +136,7 @@ print_pnm (FILE * fptr)
 
     ppa_end_print (&printer);
 
-    snprintf(syslog_message,message_size,"%s" , 
+    _snprintf(syslog_message,message_size,"%s" , 
 	     gMessages[LOG_SUCCESS]);
     wrap_syslog (LOG_INFO,  "%s",syslog_message); 
 
@@ -166,7 +168,7 @@ readPath(char *input )
     }
   else
     {
-      snprintf(syslog_message,message_size,"%s %d\n",
+      _snprintf(syslog_message,message_size,"%s %d\n",
 	       gMessages[E_BAD_PATH], MAXPATHLEN);
       wrap_syslog (LOG_CRIT,"%s",syslog_message); 
       abort();
@@ -184,7 +186,7 @@ set_printer_specific_defaults (void)
     if (printer.version != NOPRINTER && printer.version != HP7X0 &&
 	printer.version != HP820 && printer.version != HP1000)
     {
-      snprintf(syslog_message,message_size, "set_printer_defaults(): %s",
+      _snprintf(syslog_message,message_size, "set_printer_defaults(): %s",
 	       gMessages[E_PPA_UNKNOWN]);
       wrap_syslog (LOG_CRIT,"%s",syslog_message); 
       
@@ -307,18 +309,18 @@ parm_version (char *arg)
     
 
 
-    if (!strcasecmp (arg, "hp720") || !strcmp (arg, "720") ||
-	!strcasecmp (arg, "hp722") || !strcmp (arg, "722") ||
-	!strcasecmp (arg, "hp710") || !strcmp (arg, "710") ||
-	!strcasecmp (arg, "hp712") || !strcmp (arg, "712"))
+    if (!_stricmp (arg, "hp720") || !strcmp (arg, "720") ||
+	!_stricmp (arg, "hp722") || !strcmp (arg, "722") ||
+	!_stricmp (arg, "hp710") || !strcmp (arg, "710") ||
+	!_stricmp (arg, "hp712") || !strcmp (arg, "712"))
 	printer.version = HP7X0;
-    else if (!strcasecmp (arg, "hp820") || !strcmp (arg, "820"))
+    else if (!_stricmp (arg, "hp820") || !strcmp (arg, "820"))
 	printer.version = HP820;
-    else if (!strcasecmp (arg, "hp1000") || !strcmp (arg, "1000"))
+    else if (!_stricmp (arg, "hp1000") || !strcmp (arg, "1000"))
 	printer.version = HP1000;
     else
     {
-      snprintf(syslog_message,message_size,"parm_version(): %s", 
+      _snprintf(syslog_message,message_size,"parm_version(): %s", 
 	       gMessages[E_PPA_UNKNOWN]);
       wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -349,7 +351,7 @@ parm_iversion (int arg)
 	break;
     default:
 	{
-	  snprintf(syslog_message,message_size,"parm_iversion():  %s",
+	  _snprintf(syslog_message,message_size,"parm_iversion():  %s",
 		   gMessages[E_PPA_UNKNOWN]);
 	  wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -418,7 +420,7 @@ read_config_file (char *fname)
   
   if (!cfgfile)
     {
-      snprintf(syslog_message,message_size,"read_config_file(): %s", 
+      _snprintf(syslog_message,message_size,"read_config_file(): %s", 
 	       gMessages[E_BADCONFIGFILE] );
       wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -483,7 +485,7 @@ read_config_file (char *fname)
 		gUnimode = true ;
 	      else
 		gUnimode = false ;
-	    }
+		}
 	  else if (!strncmp (key, "black_ink", len))
 	    {
 	      if ( value )
@@ -552,7 +554,7 @@ read_config_file (char *fname)
 		 wrap_closelog ();
 		 wrap_openlog ("pnm2ppa", 1);
 		 }
-	      snprintf(syslog_message,message_size, "pnm2ppa: %s", 
+	      _snprintf(syslog_message,message_size, "pnm2ppa: %s", 
 		       gMessages[LOG_VERBOSE]);
 	      wrap_syslog(LOG_INFO,"%s",syslog_message); 
 	      
@@ -576,7 +578,7 @@ read_config_file (char *fname)
 		}
 	      else
 		{
-		  snprintf(syslog_message,message_size,"read_config_file(): %s",
+		  _snprintf(syslog_message,message_size,"read_config_file(): %s",
 			   gMessages[E_BAD_PAPER] );
 		  wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 		  
@@ -592,7 +594,7 @@ read_config_file (char *fname)
 	    }
 	  else
 	    {
-	      snprintf(syslog_message,message_size,"read_config_file(): %s (%s %d)\n",
+	      _snprintf(syslog_message,message_size,"read_config_file(): %s (%s %d)\n",
 		       gMessages[E_BADPARM] , gMessages[LINE],lineno );
 	      wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -603,7 +605,7 @@ read_config_file (char *fname)
 	case 0:
 	  break;
 	default:
-	  snprintf(syslog_message,message_size, "read_config_file(): %s %s %d\n",
+	  _snprintf(syslog_message,message_size, "read_config_file(): %s %s %d\n",
 		   gMessages[E_PARSE_CONFIG], gMessages[LINE], lineno);
 	  wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -617,7 +619,7 @@ read_config_file (char *fname)
       fclose (cfgfile);
       return;
     }
-  snprintf(syslog_message,message_size,"read_config_file(): %s\n",
+  _snprintf(syslog_message,message_size,"read_config_file(): %s\n",
 	   gMessages[E_PARSE_CONFIG]);
   wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -780,7 +782,7 @@ main (int argc, char *argv[])
 	      break;
 	      
 	    default:
-	      snprintf(syslog_message,message_size,"main (): %s",
+	      _snprintf(syslog_message,message_size,"main (): %s",
 		       gMessages[E_UNKNOWN_ARG]);
 	      wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -904,7 +906,7 @@ main (int argc, char *argv[])
 	    }
 	  else
 	    {
-	      snprintf(syslog_message,message_size,"main(): %s ",
+	      _snprintf(syslog_message,message_size,"main(): %s ",
 		       gMessages[E_BAD_PAPER] );
 	      wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -930,7 +932,7 @@ main (int argc, char *argv[])
 	  break;
 
 	default:
-	  snprintf(syslog_message,message_size,"main(): %s",
+	  _snprintf(syslog_message,message_size,"main(): %s",
 		   gMessages[E_UNKNOWN_ARG]);
 	  wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -948,7 +950,7 @@ main (int argc, char *argv[])
 	{
 	  if ((in = fopen (pnm_inputFile, "rb")) == NULL)
 	    {
-	      snprintf(syslog_message,message_size,"main(): %s",
+	      _snprintf(syslog_message,message_size,"main(): %s",
 		       gMessages[E_BAD_INPUT]);
 	      wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -966,7 +968,7 @@ main (int argc, char *argv[])
 	{
 	  if ((out = fopen (ppa_outputFile, "wb")) == NULL)
 	    {
-	      snprintf(syslog_message,message_size,"main(): %s",
+	      _snprintf(syslog_message,message_size,"main(): %s",
 		       gMessages[E_BAD_OUTPUT] );
 	      wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -998,7 +1000,7 @@ main (int argc, char *argv[])
 	{
 	  if ((in = fopen (argv[0], "rb")) == NULL)
 	    {
-	      snprintf(syslog_message,message_size,"main():  %s",
+	      _snprintf(syslog_message,message_size,"main():  %s",
 		      gMessages[E_BAD_INPUT]);
 	      wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -1013,7 +1015,7 @@ main (int argc, char *argv[])
 	{
 	  if ((out = fopen (argv[1], "wb")) == NULL)
 	    {
-	      snprintf(syslog_message,message_size,"main():  %s",
+	      _snprintf(syslog_message,message_size,"main():  %s",
 		       gMessages[E_BAD_OUTPUT]);
 	      wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 	      
@@ -1113,7 +1115,7 @@ main (int argc, char *argv[])
 	    {
 	      DPRINTF ("main(): Gamma curve data from %s is truncated.\n",
 		       gammaFile );
-	      snprintf(syslog_message,message_size,"main():  %s",
+	      _snprintf(syslog_message,message_size,"main():  %s",
 		      gMessages[E_BAD_GAMMAFILE]);
 	      wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 
@@ -1135,7 +1137,7 @@ main (int argc, char *argv[])
 
     /* if printer version is set to NOPRINTER in pnm2ppa.conf  */
     if (printer.version == NOPRINTER) {
-      snprintf(syslog_message,message_size,"pnm2ppa.conf: version 0; %s", 
+      _snprintf(syslog_message,message_size,"pnm2ppa.conf: version 0; %s", 
 	       gMessages[E_PPA_UNKNOWN]);
       wrap_syslog (LOG_CRIT,"%s",syslog_message); 
 

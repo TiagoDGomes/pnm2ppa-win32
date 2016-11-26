@@ -19,6 +19,10 @@
   modified Duncan Haldane <duncan_haldane@users.sourceforge.net>
   Oct 2000. all syslog messages are now wrapped.
 */
+#define __NO_SYSLOG__
+#define HAVE_STRING_H
+#define LANG_EN
+#define VERSION ""
 
 #ifndef _PNM2PPA_SYSLOG_H_
 #define _PNM2PPA_SYSLOG_H_
