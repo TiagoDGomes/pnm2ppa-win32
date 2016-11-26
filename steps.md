@@ -37,9 +37,9 @@ In global.h, add
 
 just under the #define for VERSION. This is a furphy - NT supports very very long path lengths, but 1024 is plenty for most users, and realistically Visual Studio's std C library is a bit sucky through extreme neglect, so it's safer to put a short limit on it.
 
-Remove the include for `<sys/param.h\>` in pnm2ppa.c
+Remove the include for `<sys/param.h>` in `pnm2ppa.c`
 
-Remove the include for `<unistd.h\>` in pnm2ppa.c
+Remove the include for `<unistd.h>` in `pnm2ppa.c`
 
 Press control-h to bring up find and replace in all C files...
 
