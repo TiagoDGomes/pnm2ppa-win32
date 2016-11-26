@@ -35,11 +35,11 @@ In global.h, add
 
     #define MAXPATHLEN	1024
 
-just under the #define for VERSION. This is a furphy - NT supports very very long path lengths, but 1024 is plenty for most users, and realistically Visual Studio's std C library is a bit sucky through extreme neglect, so it's safer to put a short limit on it.
+just under the `#define` for `VERSION`. This is a furphy - NT supports very very long path lengths, but 1024 is plenty for most users, and realistically Visual Studio's std C library is a bit sucky through extreme neglect, so it's safer to put a short limit on it.
 
-Remove the include for `<sys/param.h>` in `pnm2ppa.c`
+Remove the include for `<sys/param.h>` in *pnm2ppa.c*
 
-Remove the include for `<unistd.h>` in `pnm2ppa.c`
+Remove the include for `<unistd.h>` in *pnm2ppa.c*
 
 Press control-h to bring up find and replace in all C files...
 
@@ -51,7 +51,7 @@ Replace all instances of `<getopt.h>` with `"gnugetopt.h"`
 
 Replace all "inline" key words with `"/*` in-line doesn't work `*/"`
 
-The compiler barfs on these as the way pnm2ppa uses inline is a gcc-ism. Visual Studio's compiler is *way* smarter at picking these routines than we are anyway, particularly if you optimize for speed.
+The compiler barfs on these as the way pnm2ppa uses inline is a *gcc-ism*. Visual Studio's compiler is *way* smarter at picking these routines than we are anyway, particularly if you optimize for speed.
 
 Choose "Release" build. Right click the project, and choose properties. Open the preprocessor options. Add
 
@@ -59,7 +59,7 @@ Choose "Release" build. Right click the project, and choose properties. Open the
 
 to the "Release" project's preprocessor options.
 
-Click "Rebuild". About 2-3 seconds later, you have a working pnm2ppa for win32 in the release directory. There's 26 remaining warnings, some of which point to actual bugs. size_t and pointer arithmetic is not done well in pnm2ppa. But for the purposes of this exercise, we will ignore them.
+Click "Rebuild". About 2-3 seconds later, you have a working pnm2ppa for win32 in the release directory. There's 26 remaining warnings, some of which point to actual bugs. `size_t` and pointer arithmetic is not done well in pnm2ppa. But for the purposes of this exercise, we will ignore them.
 
 
     C:\home\ajv\Visual Studio Projects\pnm2ppa\Release>dir *.exe
@@ -81,4 +81,5 @@ Click "Rebuild". About 2-3 seconds later, you have a working pnm2ppa for win32 i
 But the reality is that the HP driver + Ghostscript using GDI or use Ghostscript to make PDF's, and then printing via Acrobat is the best choice.
 
 Thanks,
+
 Andrew
