@@ -51,7 +51,7 @@ struct entry_list
 			      numbers first */
 } *start_list = 0;
 
-inline int 
+int 
 calc_xyz( struct hash_ink *hi )
 { 
   /* if these assertions fail the result is not unique */
