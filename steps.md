@@ -37,19 +37,13 @@ In *global.h*, add
 
 just under the `#define` for `VERSION`. This is a furphy - NT supports very very long path lengths, but 1024 is plenty for most users, and realistically Visual Studio's std C library is a bit sucky through extreme neglect, so it's safer to put a short limit on it.
 
-Remove the include for `<sys/param.h>` in *pnm2ppa.c*
-
-Remove the include for `<unistd.h>` in *pnm2ppa.c*
-
-Press control-h to bring up find and replace in all C files...
-
-Replace all 72 instances of `snprintf` with `_snprintf`
-
-Replace all 6 instances of `strcasecmp` with `_stricmp`
-
-Replace all instances of `<getopt.h>` with `"gnugetopt.h"`
-
-Replace all "inline" key words with `"/*` in-line doesn't work `*/"`
+  *  Remove the include for `<sys/param.h>` in *pnm2ppa.c*
+  *  Remove the include for `<unistd.h>` in *pnm2ppa.c*
+  *  Press control-h to bring up find and replace in all C files...
+  *  Replace all 72 instances of `snprintf` with `_snprintf`
+  *  Replace all 6 instances of `strcasecmp` with `_stricmp`
+  *  Replace all instances of `<getopt.h>` with `"gnugetopt.h"`
+  *  Replace all "inline" key words with `"/*` in-line doesn't work `*/"`
 
 The compiler barfs on these as the way pnm2ppa uses inline is a *gcc-ism*. Visual Studio's compiler is *way* smarter at picking these routines than we are anyway, particularly if you optimize for speed.
 
